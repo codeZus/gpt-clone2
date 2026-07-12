@@ -5,6 +5,7 @@ import ChatInput from "./components/ChatInput/ChatInput.jsx";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
+const API_URL = "https://gpt-clone2-backend.onrender.com"; // Deployment insertion
 function App() {
   const [conversations, setConversations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +15,7 @@ function App() {
   async function fetchConversations() {
     try {
       const { data } = await axios.get(
-        "http://localhost:3300/api/chat/conversations",
+        `${API_URL}/api/chat/conversations`, //Edited for deployment
       );
       console.log("Fetched history:", data.data);
       setConversations(data.data);
@@ -37,7 +38,7 @@ function App() {
     try {
       setIsLoading(true);
       const { data } = await axios.post(
-        "http://localhost:3300/api/chat/conversations",
+        `${API_URL}/api/chat/conversations`, //Edited for deployment
         {
           question: question.trim(),
         },
