@@ -7,17 +7,17 @@ import { errorHandler } from "./src/midware/error-handler.js";
 
 const app = express();
 
-// CORS configuration to allow requests from the frontend
+// CORS configuration - updated to use environment variable
 app.use(
   cors({
-    origin: "http://localhost:3000", // Match your frontend URL
+    origin: process.env.CORS_ORIGIN || "http://localhost:3000",
   }),
 );
 
 app.use(express.json());
 app.use("/api", mainRouter);
 
-//final middleware to handle errors
+// final middleware to handle errors
 app.use(errorHandler);
 
 async function startServer() {
